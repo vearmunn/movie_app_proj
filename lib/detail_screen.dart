@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'data/movies.dart';
+import 'widgets/favorite_button.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends StatelessWidget {
   final Movie movie;
   const DetailScreen({Key? key, required this.movie}) : super(key: key);
 
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
-
-class _DetailScreenState extends State<DetailScreen> {
-  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   ? MediaQuery.of(context).size.height * 0.4
                                   : MediaQuery.of(context).size.height * 0.6,
                               child: Image.asset(
-                                widget.movie.imageUrl,
+                                movie.imageUrl,
                                 fit: BoxFit.cover,
                               )),
                           SafeArea(
@@ -59,26 +54,13 @@ class _DetailScreenState extends State<DetailScreen> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    widget.movie.title,
+                                    movie.title,
                                     style: const TextStyle(
                                         fontSize: 24,
-                                        
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        isFavorite = !isFavorite;
-                                      });
-                                    },
-                                    icon: isFavorite
-                                        ? const Icon(
-                                            Icons.favorite,
-                                            color: Colors.red,
-                                          )
-                                        : const Icon(Icons.favorite_border,
-                                            color: Colors.grey))
+                                const FavoriteButton()
                               ],
                             ),
                             const SizedBox(
@@ -91,7 +73,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   color: Colors.red,
                                 ),
                                 Text(
-                                  widget.movie.rating,
+                                  movie.rating,
                                   style: const TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold),
@@ -100,7 +82,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   width: 16,
                                 ),
                                 Text(
-                                  widget.movie.yearRelease.toString(),
+                                  movie.yearRelease.toString(),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -115,7 +97,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                           color: Colors.red, width: 2),
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Text(
-                                    '${widget.movie.age.toString()} +',
+                                    '${movie.age.toString()} +',
                                     style: const TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold),
@@ -132,7 +114,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                           color: Colors.red, width: 2),
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Text(
-                                    widget.movie.country,
+                                    movie.country,
                                     style: const TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold),
@@ -171,7 +153,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               height: 24,
                             ),
                             Text(
-                              'Genre ${widget.movie.genres}',
+                              'Genre ${movie.genres}',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold),
                             ),
@@ -179,7 +161,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               height: 8,
                             ),
                             Text(
-                              widget.movie.desc,
+                              movie.desc,
                               style: const TextStyle(),
                             ),
                             const SizedBox(
