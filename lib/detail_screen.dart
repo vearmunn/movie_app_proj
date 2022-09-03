@@ -62,6 +62,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     widget.movie.title,
                                     style: const TextStyle(
                                         fontSize: 24,
+                                        
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
